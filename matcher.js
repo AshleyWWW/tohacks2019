@@ -25,9 +25,9 @@ fs.createReadStream(filename)
         //console.log(`${headers}`)
 		//console.log(headers) // print every damn thing
 		headersTable.push(headers)
-        console.log(headersTable)
+        // console.log(headersTable)
 		
-        console.log('Headers captured. Carry on.')
+        // console.log('Headers captured. Carry on.')
     });
 
 
@@ -45,7 +45,7 @@ fs.createReadStream(filename)
     })
     .on('end', () => { // at end of file...
         //console.log(dataTable) // print every damn thing
-        console.log('File processed. Glory to our robot overlords!')
+        // console.log('File processed. Glory to our robot overlords!')
     });
 
 //console.log(dataTable[0])
@@ -64,23 +64,34 @@ app.get('/', (req, res) => {
     function computeMatch(element, profile) {
         // does their age match
         function ageMatch(min, max, age) {
+            console.log(element.name + " ageMatch " + min + " " + max + " " + age + " " + (age ? (age >= min && age <= max) : blankMeansYes));
             return age ? (age >= min && age <= max) : blankMeansYes; // ? : is called the ternary operator btw
         }
         // does their location match
         function locationMatch(places, destination) {
+            console.log(element.name + " loc " + (destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes));
             //return destination ? (`${places}`.includes('ANY') || `${places}`.includes(`${destination}`)) : blankMeansYes;
 			//return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
 			if (destination !== "undefined"){
 				
-				if(places.includes('ANY')) { console.log("yes"); return true;}
-				if(places.includes(`${destination}`)) {console.log("yes"); return true;}
+				if(places.includes('ANY')) { 
+                    // console.log("yes"); 
+                    return true;
+                }
+				if(places.includes(`${destination}`)) {
+                    // console.log("yes"); 
+                    return true;
+                }
 				return false;
 				
 			}
-            else {blankMeansYes;}
+            else { 
+                blankMeansYes;
+            }
         }
         // does their student status/not match
         function studentStatusMatch(requirement, status) {
+            console.log(element.name + " stu " + (status ? (requirement == 'ANY' || requirement == status) : blankMeansYes));
             return status ? (requirement == 'ANY' || requirement == status) : blankMeansYes;
         }
         // etc etc, can someone else do this
@@ -95,7 +106,7 @@ app.get('/', (req, res) => {
     results = [];
     // for each bursary in the table
     dataTable.forEach((element) => {
-		//console.log(element.name)
+		console.log("\n" + element.name)
 		//alert(element.name)
         if (computeMatch(element, req.query)) {
             console.log(element.name)
