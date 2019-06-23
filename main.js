@@ -3,8 +3,8 @@ document.getElementById("submitBtn").onclick = function (event) {
     function assembleQueryString() {
         var query = "?" + 
                     // "originCountry=" + document.getElementById("originCountry").innerHTML +
-                    // "&yearsInCanada=" + document.getElementById("yearsCDN").innerHTML + 
-                    "destination=" + document.getElementById("destination").value + 
+                    "yearsInCanada=" + document.getElementById("yearsInCanada").value + 
+                    "&destination=" + document.getElementById("destination").value + 
                     "&age=" + document.getElementById("age").value +
                     // "&maritalStatus=" + maritalSel.options[maritalSel.selectedIndex].text +
                     "&studentStatus=" + (document.getElementById("studentStatus").checked ? "Y" : "N") + 
@@ -13,7 +13,7 @@ document.getElementById("submitBtn").onclick = function (event) {
         return query;
     }
     
-    fetch("http://hackdemo0822.azurewebsites.net/" + assembleQueryString(), {
+    fetch("http://localhost:3000/" + assembleQueryString(), {
         mode: 'cors'
     }).then(function (data) {
         console.log(data);

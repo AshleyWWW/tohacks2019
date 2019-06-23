@@ -76,9 +76,10 @@ app.get('/', (req, res) => {
             return status ? (requirement == 'ANY' || requirement == status) : blankMeansYes;
         }
         function schoolMatch(requirement, school) {
-            console.log(school);
-            console.log(requirement == 'ANY' || requirement == 'NONE' || requirement.includes(school));
             return school ? (requirement == 'ANY' || requirement == 'NONE' || requirement.includes(school)) : blankMeansYes;
+        }
+        function yearsInCanadaMatch(min, actual) {
+            return actual ? actual >= min : blankMeansYes;
         }
         // etc etc, can someone else do this
 
@@ -87,6 +88,7 @@ app.get('/', (req, res) => {
             && locationMatch(element.provinces, profile.destination)
             && studentStatusMatch(element.studentStatus, profile.studentStatus)
             && schoolMatch(element.school, profile.school)
+            && yearsInCanadaMatch(element.yearsInCanada, profile.yearsInCanada)
             );
     }
 
