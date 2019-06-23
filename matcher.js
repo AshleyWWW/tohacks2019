@@ -21,14 +21,12 @@ fs.createReadStream(filename)
     .pipe(csv({
         separator: '\t', // be sneaky and pretend the tsv is a csv 
 })) 
-    .on('data', (row) => { // for every new row...
-        headersTable.push(row) // add parsed data to array
-        //console.log(row) // print what you see to console?
-    })
-    .on('headers', () => { // at end of file...
-        console.log(HeadersTable) // print every damn thing
+    .on('headers', (headers) => { // at end of file...
+        //console.log(`${headers}`)
+		console.log(headers) // print every damn thing
         console.log('Headers captured. Carry on.')
     });
+
 
 const dataTable = [] // holds all the parsed data
 
@@ -43,12 +41,13 @@ fs.createReadStream(filename)
         //console.log(row) // print what you see to console?
     })
     .on('end', () => { // at end of file...
-        console.log(dataTable) // print every damn thing
+        //console.log(dataTable) // print every damn thing
         console.log('File processed. Glory to our robot overlords!')
     });
 
 //console.log(dataTable[0])
 //-----------------------------------
+
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -67,7 +66,8 @@ app.get('/', (req, res) => {
         // does their location match
         function locationMatch(places, destination) {
             return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
-
+			// if destination(places.includes('ANY') || places.includes(destination)) return destination;
+            // else blankMeansYes;i
         }
         // does their student status/not match
         function studentStatusMatch(requirement, status) {
@@ -85,8 +85,11 @@ app.get('/', (req, res) => {
     results = [];
     // for each bursary in the table
     dataTable.forEach((element) => {
+		//console.log(element.name)
+		//alert(element.name)
         if (computeMatch(element, req.query)) {
-            results.push(element); // the person is suited to this grant/bursary/thing
+            console.log(element.name)
+			results.push(element); // the person is suited to this grant/bursary/thing
         }
     });
 
