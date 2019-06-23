@@ -65,29 +65,15 @@ app.get('/', (req, res) => {
         // does their age match
         function ageMatch(min, max, age) {
             console.log(element.name + " ageMatch " + min + " " + max + " " + age + " " + (age ? (age >= min && age <= max) : blankMeansYes));
+            console.log((age) + (age >= min) + (age <= max) + blankMeansYes);
             return age ? (age >= min && age <= max) : blankMeansYes; // ? : is called the ternary operator btw
         }
         // does their location match
         function locationMatch(places, destination) {
             console.log(element.name + " loc " + (destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes));
             //return destination ? (`${places}`.includes('ANY') || `${places}`.includes(`${destination}`)) : blankMeansYes;
-			//return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
-			if (destination !== "undefined"){
-				
-				if(places.includes('ANY')) { 
-                    // console.log("yes"); 
-                    return true;
-                }
-				if(places.includes(`${destination}`)) {
-                    // console.log("yes"); 
-                    return true;
-                }
-				return false;
-				
-			}
-            else { 
-                blankMeansYes;
-            }
+			return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
+			
         }
         // does their student status/not match
         function studentStatusMatch(requirement, status) {
@@ -97,7 +83,7 @@ app.get('/', (req, res) => {
         // etc etc, can someone else do this
 
         //return whether or not the criteria all matches
-        return (ageMatch(element.ageMin, element.ageMax, profile.age) 
+        return (ageMatch(parseInt(element.ageMin), parseInt(element.ageMax), parseInt(profile.age)) 
             && locationMatch(element.provinces, profile.destination)
             && studentStatusMatch(element.studentStatus, profile.studentStatus));
     }
