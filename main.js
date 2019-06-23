@@ -1,19 +1,18 @@
 document.getElementById("submitBtn").onclick = function (event) {
     event.preventDefault();
     function assembleQueryString() {
-        var maritalSel = document.getElementById("userProf");
         var query = "?" + 
                     // "originCountry=" + document.getElementById("originCountry").innerHTML +
                     // "&yearsInCanada=" + document.getElementById("yearsCDN").innerHTML + 
-                    "&destination=" + document.getElementById("hostProv").innerHTML + 
-                    "&age=" + document.getElementById("age").innerHTML;
+                    "destination=" + document.getElementById("destination").value + 
+                    "&age=" + document.getElementById("age").value;
                     // "&maritalStatus=" + maritalSel.options[maritalSel.selectedIndex].text +
                     // "&school=" + document.getElementById("school").innerHTML +
                     // "&dependants=" + document.getElementById("userDependant").innerHTML;
         return query;
     }
     
-    fetch("http://localhost:3000/?age=20", {
+    fetch("http://localhost:3000/" + assembleQueryString(), {
         mode: 'cors'
     }).then(function (data) {
         console.log(data);
@@ -21,7 +20,7 @@ document.getElementById("submitBtn").onclick = function (event) {
     }).then(function (body) {
         headers = ['name', 'url', 'provinces', 'ageMin', 'ageMax', 'language', 'studentStatus', 'school', 'gpa', 'maritalStat', 'dependants', 'ethnicity', 'yearsInCanada'] // renamed headers, etc
         headerNames = ['NAME OF BURSARY', 'LINK', 'ENTRY PROVINCE', 'AGE MIN', 'AGE MAX', 'ENGLISH/FRENCH COMPETENT (oral and written)', 'STUDENT-BASED(Y/N)', 'SCHOOL OF STUDY (NONE if not student, ANY for any school)', 'GRADE AVERAGE (NONE, if none needed)', 'MARRIAGE STATUS (Married, Single, ANY)', 'NUMBER OF DEPENDANTS (ANY for acceptance regardless)', 'ETHNICITY (ANY for open acceptance)', 'Minimum Number of Years in Canada'];
-        var table = "<table class='table'><thead><tr>";
+        var table = "<table class='table table-responsive'><thead><tr>";
         headerNames.forEach(header => {
             table += "<th scope='col'>" + header + "</th>";
         });

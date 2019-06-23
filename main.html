@@ -1,26 +1,28 @@
 <!DOCTYPE html>
+
 <head>
     <title>Refugee Resource Hub</title>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.css" />
-	
+
 </head>
-<body> 
-    <form action="/action_page.php">
-        <div class="form-group">
-          <label for="email">Email address:</label>
-          <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-          <label for="pwd">Password:</label>
-          <input type="password" class="form-control" id="pwd">
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox"> Remember me</label>
-        </div>
-        <button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    <div id="output"></div>
+
+<body>
+    <div class="container">
+        <h1>Refugee Resources</h1>
+        <form>
+            <div class="form-group">
+                <label for="age">Age: </label>
+                <input type="number" class="form-control" id="age">
+            </div>
+            <div class="form-group">
+                <label for="destination">Host province:</label>
+                <input type="text" class="form-control" id="destination">
+            </div>
+            <button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div id="output"></div>
+    </div>
     <script type="text/javascript" src="main.js"> </script>
 </body>
