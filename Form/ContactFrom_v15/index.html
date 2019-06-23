@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V15</title>
+	<title>Refugee Resource Hub</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -36,11 +36,12 @@
 		<div class="wrap-contact100">
 			<div class="contact100-form-title" style="background-image: url(images/bg-01.jpg);">
 				<span class="contact100-form-title-1">
-					Contact Us
+					User Profile
 				</span>
 
 				<span class="contact100-form-title-2">
-					Feel free to drop us a line below!
+					Please fill in the following information below
+					to find financial resources
 				</span>
 			</div>
 
@@ -51,24 +52,41 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<span class="label-input100">Email:</span>
-					<input class="input100" type="text" name="email" placeholder="Enter email addess">
+				<div class="wrap-input100 validate-input" data-validate = "Country of origin must be provided">
+					<span class="label-input100">Home Country:</span>
+					<input class="input100" type="text" name="origin" placeholder="Enter country of origin">
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Phone is required">
-					<span class="label-input100">Phone:</span>
-					<input class="input100" type="text" name="phone" placeholder="Enter phone number">
+				<div class="wrap-input100 validate-input" data-validate="Host province is required">
+					<span class="label-input100">Host Province:</span>
+					<input class="input100" type="text" name="province" placeholder="Enter host province">
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Message is required">
-					<span class="label-input100">Message:</span>
-					<textarea class="input100" name="message" placeholder="Your Comment..."></textarea>
+				<div class="wrap-input100 validate-input" data-validate="Age is required">
+					<span class="label-input100">Age:</span>
+					<input class="input100" type="text" name="age" placeholder="Enter your age">
 					<span class="focus-input100"></span>
 				</div>
 
+				<div class="row">
+					<div class="col-md-12">
+				  
+					  <select class="mdb-select colorful-select dropdown-primary md-form" multiple searchable="Search here..">
+						<option value="" disabled selected>Choose your country</option>
+						<option value="1">USA</option>
+						<option value="2">Germany</option>
+						<option value="3">France</option>
+						<option value="4">Poland</option>
+						<option value="5">Japan</option>
+					  </select>
+			
+					</div>
+				  </div>
+					
+		
+		
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
