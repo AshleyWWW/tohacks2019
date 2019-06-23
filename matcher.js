@@ -16,6 +16,20 @@ var filename = "Refugee Bursary and Grant Resource.tsv" // name of TSV
 const csv = require('csv-parser') // requires npm csv-parser, csv
 /*var*/ const fs = require('fs')
 
+const headersTable = []
+fs.createReadStream(filename)
+    .pipe(csv({
+        separator: '\t', // be sneaky and pretend the tsv is a csv 
+})) 
+    .on('data', (row) => { // for every new row...
+        headersTable.push(row) // add parsed data to array
+        //console.log(row) // print what you see to console?
+    })
+    .on('headers', () => { // at end of file...
+        console.log(HeadersTable) // print every damn thing
+        console.log('Headers captured. Carry on.')
+    });
+
 const dataTable = [] // holds all the parsed data
 
 fs.createReadStream(filename)
@@ -35,6 +49,51 @@ fs.createReadStream(filename)
 
 //console.log(dataTable[0])
 //-----------------------------------
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next(); 
+  });
+
+// what to do when the GET request comes in
+app.get('/', (req, res) => {
+    // does this person's profile match this element (entry of the data table)?
+    function computeMatch(element, profile) {
+        // does their age match
+        function ageMatch(min, max, age) {
+            return age ? (age >= min && age <= max) : blankMeansYes; // ? : is called the ternary operator btw
+        }
+        // does their location match
+        function locationMatch(places, destination) {
+            return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
+
+        }
+        // does their student status/not match
+        function studentStatusMatch(requirement, status) {
+            return status ? (requirement == 'ANY' || requirement == status) : blankMeansYes;
+        }
+        // etc etc, can someone else do this
+
+        //return whether or not the criteria all matches
+        return (ageMatch(element.ageMin, element.ageMax, profile.age) 
+            && locationMatch(element.provinces, profile.destination)
+            && studentStatusMatch(element.studentStatus, profile.studentStatus));
+    }
+
+    // the bursaries the user qualifies for 
+    results = [];
+    // for each bursary in the table
+    dataTable.forEach((element) => {
+        if (computeMatch(element, req.query)) {
+            results.push(element); // the person is suited to this grant/bursary/thing
+        }
+    });
+
+    res.send(results); // send back the matches
+})
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 /* // Hard-coded values for testing
 // TODO replace with code that reads from the "database"
@@ -64,47 +123,3 @@ dataTable = [
         "studentStatus": "N"
     }
 ]; */
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next(); 
-  });
-
-// what to do when the GET request comes in
-app.get('/', (req, res) => {
-    // does this person's profile match this element (entry of the data table)?
-    function computeMatch(element, profile) {
-        // does their age match
-        function ageMatch(min, max, age) {
-            return age ? (age >= min && age <= max) : blankMeansYes; // ? : is called the ternary operator btw
-        }
-        // does their location match
-        function locationMatch(places, destination) {
-            return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
-        }
-        // does their student status/not match
-        function studentStatusMatch(requirement, status) {
-            return status ? (requirement == 'ANY' || requirement == status) : blankMeansYes;
-        }
-        // etc etc, can someone else do this
-
-        //return whether or not the criteria all matches
-        return (ageMatch(element.ageMin, element.ageMax, profile.age) 
-            && locationMatch(element.provinces, profile.destination)
-            && studentStatusMatch(element.studentStatus, profile.studentStatus));
-    }
-
-    // the bursaries the user qualifies for 
-    results = [];
-    // for each bursary in the table
-    dataTable.forEach((element) => {
-        if (computeMatch(element, req.query)) {
-            results.push(element); // the person is suited to this grant/bursary/thing
-        }
-    });
-
-    res.send(results); // send back the matches
-})
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
