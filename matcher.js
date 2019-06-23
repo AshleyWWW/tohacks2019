@@ -1,3 +1,7 @@
+/* 
+    in which sleep deprieved programmers argue about naming conventions
+*/
+
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -9,22 +13,27 @@ const blankMeansYes = true;
 //---------------------------------
 var filename = "Refugee Bursary and Grant Resource.tsv" // name of TSV
 
-const csv = require('csv-parser')
+const csv = require('csv-parser') // requires npm csv-parser, csv
 /*var*/ const fs = require('fs')
 
-var dataTable = [] // holds all the parsed data
+const dataTable = [] // holds all the parsed data
 
 fs.createReadStream(filename)
-    .pipe(csv({separator: '\t'})) // be sneaky and pretend the tsv is a csv 
-    .on('data', (row) => { // for every new row, do this:
-        
-        dataTable.push(row)
+    .pipe(csv({
+        separator: '\t', // be sneaky and pretend the tsv is a csv 
+        skipLines: 1, // ignore parsed headers
+        headers: ['name', 'url', 'ageMin', 'ageMax', 'provinces', 'studentStatus'] // renamed headers
+    })) 
+    .on('data', (row) => { // for every new row...
+        dataTable.push(row) // add parsed data to array
         //console.log(row) // print what you see to console?
     })
-    .on('end', () => { // at end of file, do this
-        console.log(arr) // print every fucking thing
+    .on('end', () => { // at end of file...
+        console.log(dataTable) // print every damn thing
         console.log('File processed. Glory to our robot overlords!')
-    })
+    });
+
+//console.log(dataTable[0])
 //-----------------------------------
 
 /* // Hard-coded values for testing
@@ -92,4 +101,4 @@ app.get('/', (req, res) => {
     res.send(results); // send back the matches
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+//app.listen(port, () => console.log(`Example app listening on port ${port}!`));
