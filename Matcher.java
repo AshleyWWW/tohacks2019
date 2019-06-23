@@ -1,20 +1,16 @@
+import java.util.Arrays;
+
 public class Matcher {
-    
-    private class Match {
-        public boolean pass; 
-        public boolean strict; // if true, failing this is a hard no
-        public String message; 
+
+    public static int computeScore() {
+        return 0; 
     }
 
-    public static double computeScore() {
-        return 0.0; 
+    public static boolean ageMatch(double min, double max, double actual) {
+        return (min < actual && actual < max);
     }
 
-    public static Match ageMatch() {
-        return new Match(); 
-    }
-
-    public static Match provinceMatch() {
-        return new Match(); 
+    public static boolean provinceMatch(String[] places, String destination) {
+        return Arrays.asList(places).contains(destination);
     }
 }
