@@ -1,5 +1,5 @@
 /* 
-    in which a washed up engineer cries about 'Hello World'
+    in which a washed up engineer fails to come up with competent code
 */
 
 const express = require('express')
@@ -13,13 +13,17 @@ var filename = "Refugee Bursary and Grant Resource.tsv" // name of TSV
 const csv = require('csv-parser')
 /*var*/ const fs = require('fs')
 
+var dataTable = [] // holds all the parsed data
+
 fs.createReadStream(filename)
-    .pipe(csv({separator: '\t'})) // be sneaky and pretend the tsv is a csv 
+    .pipe(csv(['name', 'url', 'ageMin', 'ageMax', 'provinces', 'studentStatus'], {separator: '\t'})) // be sneaky and pretend the tsv is a csv 
     .on('data', (row) => { // for every new row, do this:
-        console.log(row) // print what you see to console?
-		
+        
+        dataTable.push(row)
+        //console.log(row) // print what you see to console?
     })
     .on('end', () => { // at end of file, do this
+        console.log(arr) // print every fucking thing
         console.log('File processed. Glory to our robot overlords!')
     })
 
@@ -36,16 +40,9 @@ fs.createReadStream(filename)
         delimiter: '\t' // be sneaky and pretend the tsv is a csv
     })
 
-
-
-    
-
-
 }); */
 
 //console.log('after calling readFile');
-
-
 
 /* 
     // attempt at another thing
