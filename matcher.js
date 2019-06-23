@@ -24,6 +24,9 @@ fs.createReadStream(filename)
     .on('headers', (headers) => { // at end of file...
         //console.log(`${headers}`)
 		console.log(headers) // print every damn thing
+		headersTable.push(headers)
+        console.log(headersTable)
+		
         console.log('Headers captured. Carry on.')
     });
 
@@ -65,7 +68,8 @@ app.get('/', (req, res) => {
         }
         // does their location match
         function locationMatch(places, destination) {
-            return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
+            //return destination ? (`${places}`.includes('ANY') || `${places}`.includes(`${destination}`)) : blankMeansYes;
+			return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
 			// if destination(places.includes('ANY') || places.includes(destination)) return destination;
             // else blankMeansYes;i
         }
