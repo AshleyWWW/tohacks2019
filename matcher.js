@@ -22,7 +22,7 @@ fs.createReadStream(filename)
     .pipe(csv({
         separator: '\t', // be sneaky and pretend the tsv is a csv 
         skipLines: 1, // ignore parsed headers
-        headers: ['name', 'url', 'ageMin', 'ageMax', 'provinces', 'studentStatus'] // renamed headers
+        headers: ['name', 'url', 'provinces', 'ageMin', 'ageMax', 'language', 'studentStatus', 'school', 'gpa', 'maritalStat', 'dependants', 'ethnicity', 'yearsInCanada'] // renamed headers, etc
     })) 
     .on('data', (row) => { // for every new row...
         dataTable.push(row) // add parsed data to array
