@@ -107,4 +107,4 @@ app.get('/', (req, res) => {
     res.send(results); // send back the matches
 })
 
-//app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
