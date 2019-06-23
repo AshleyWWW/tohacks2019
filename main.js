@@ -7,7 +7,8 @@ document.getElementById("submitBtn").onclick = function (event) {
                     "destination=" + document.getElementById("destination").value + 
                     "&age=" + document.getElementById("age").value +
                     // "&maritalStatus=" + maritalSel.options[maritalSel.selectedIndex].text +
-                    "&studentStatus=" + (document.getElementById("studentStatus").checked ? "Y" : "N");
+                    "&studentStatus=" + (document.getElementById("studentStatus").checked ? "Y" : "N") + 
+                    "&school=" + document.getElementById("school").value;
                     // "&dependants=" + document.getElementById("userDependant").innerHTML;
         return query;
     }

@@ -75,18 +75,26 @@ app.get('/', (req, res) => {
         function studentStatusMatch(requirement, status) {
             return status ? (requirement == 'ANY' || requirement == status) : blankMeansYes;
         }
+        function schoolMatch(requirement, school) {
+            console.log(school);
+            console.log(requirement == 'ANY' || requirement == 'NONE' || requirement.includes(school));
+            return school ? (requirement == 'ANY' || requirement == 'NONE' || requirement.includes(school)) : blankMeansYes;
+        }
         // etc etc, can someone else do this
 
         //return whether or not the criteria all matches
         return (ageMatch(parseInt(element.ageMin), parseInt(element.ageMax), parseInt(profile.age)) 
             && locationMatch(element.provinces, profile.destination)
-            && studentStatusMatch(element.studentStatus, profile.studentStatus));
+            && studentStatusMatch(element.studentStatus, profile.studentStatus)
+            && schoolMatch(element.school, profile.school)
+            );
     }
 
     // the bursaries the user qualifies for 
     results = [];
     // for each bursary in the table
     dataTable.forEach((element) => {
+        console.log(element.name);
 		if (computeMatch(element, req.query)) {
             results.push(element); // the person is suited to this grant/bursary/thing
         }
