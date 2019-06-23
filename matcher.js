@@ -15,7 +15,7 @@ const csv = require('csv-parser')
 var dataTable = [] // holds all the parsed data
 
 fs.createReadStream(filename)
-    .pipe(csv(['name', 'url', 'ageMin', 'ageMax', 'provinces', 'studentStatus'], {separator: '\t'})) // be sneaky and pretend the tsv is a csv 
+    .pipe(csv({separator: '\t'})) // be sneaky and pretend the tsv is a csv 
     .on('data', (row) => { // for every new row, do this:
         
         dataTable.push(row)
