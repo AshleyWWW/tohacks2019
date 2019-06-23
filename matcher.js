@@ -23,8 +23,11 @@ fs.createReadStream(filename)
 })) 
     .on('headers', (headers) => { // at end of file...
         //console.log(`${headers}`)
-		console.log(headers) // print every damn thing
-        console.log('Headers captured. Carry on.')
+		//console.log(headers) // print every damn thing
+		headersTable.push(headers)
+        // console.log(headersTable)
+		
+        // console.log('Headers captured. Carry on.')
     });
 
 
@@ -42,7 +45,7 @@ fs.createReadStream(filename)
     })
     .on('end', () => { // at end of file...
         //console.log(dataTable) // print every damn thing
-        console.log('File processed. Glory to our robot overlords!')
+        // console.log('File processed. Glory to our robot overlords!')
     });
 
 //console.log(dataTable[0])
@@ -66,8 +69,7 @@ app.get('/', (req, res) => {
         // does their location match
         function locationMatch(places, destination) {
             return destination ? (places.includes('ANY') || places.includes(destination)) : blankMeansYes;
-			// if destination(places.includes('ANY') || places.includes(destination)) return destination;
-            // else blankMeansYes;i
+			
         }
         // does their student status/not match
         function studentStatusMatch(requirement, status) {
@@ -76,7 +78,7 @@ app.get('/', (req, res) => {
         // etc etc, can someone else do this
 
         //return whether or not the criteria all matches
-        return (ageMatch(element.ageMin, element.ageMax, profile.age) 
+        return (ageMatch(parseInt(element.ageMin), parseInt(element.ageMax), parseInt(profile.age)) 
             && locationMatch(element.provinces, profile.destination)
             && studentStatusMatch(element.studentStatus, profile.studentStatus));
     }
@@ -85,44 +87,11 @@ app.get('/', (req, res) => {
     results = [];
     // for each bursary in the table
     dataTable.forEach((element) => {
-		//console.log(element.name)
-		//alert(element.name)
-        if (computeMatch(element, req.query)) {
-            console.log(element.name)
-			results.push(element); // the person is suited to this grant/bursary/thing
+		if (computeMatch(element, req.query)) {
+            results.push(element); // the person is suited to this grant/bursary/thing
         }
     });
-
     res.send(results); // send back the matches
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
-/* // Hard-coded values for testing
-// TODO replace with code that reads from the "database"
-dataTable = [
-    {
-        "name": "Incoming Refugee Sponsorship Bursary (IRSB) - ON",
-        "url": "https://static1.squarespace.com/static/56d1fe3ed210b8b23f16d059/t/5aaff3042b6a28d1b413f7ca/1521480453390/Incoming+Refugee+Sponsorship+Bursary+%282%29.pdf",
-        "ageMin": 17,
-        "ageMax": 30,
-        "provinces": ["ANY"],
-        "studentStatus": "Y"
-    },
-    {
-        "name": "Resettlement Assistance Program (RAP)  - All Provinces, excluding Quebec",
-        "url": "http://www.rstp.ca/wp-content/uploads/2019/03/Start-up.pdf",
-        "ageMin": 0,
-        "ageMax": 100,
-        "provinces": ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Nova Scotia", "Ontario", "Prince Edward Island", "Saskatchewan"],
-        "studentStatus": "N"
-    }, 
-    {
-        "name" : "Alberta Resettlement Assistance Program (RAP) Rate",
-        "url" : "http://www.rstp.ca/wp-content/uploads/2018/08/Alberta-RAP-rates.pdf",
-        "ageMin" : 0,
-        "ageMax" : 100,
-        "provinces" : ["Alberta"],
-        "studentStatus": "N"
-    }
-]; */
+app.listen(port, () => console.log(`App listening on port ${port}!`));
