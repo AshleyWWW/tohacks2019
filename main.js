@@ -5,9 +5,9 @@ document.getElementById("submitBtn").onclick = function (event) {
                     // "originCountry=" + document.getElementById("originCountry").innerHTML +
                     // "&yearsInCanada=" + document.getElementById("yearsCDN").innerHTML + 
                     "destination=" + document.getElementById("destination").value + 
-                    "&age=" + document.getElementById("age").value;
+                    "&age=" + document.getElementById("age").value +
                     // "&maritalStatus=" + maritalSel.options[maritalSel.selectedIndex].text +
-                    // "&school=" + document.getElementById("school").innerHTML +
+                    "&studentStatus=" + (document.getElementById("studentStatus").checked ? "Y" : "N");
                     // "&dependants=" + document.getElementById("userDependant").innerHTML;
         return query;
     }
@@ -26,10 +26,13 @@ document.getElementById("submitBtn").onclick = function (event) {
         });
         table += "</tr></thead><tbody>";
         body.forEach(element => {
-            console.log(element);
             table += "<tr>"
             headers.forEach(header => {
-                table += "<td>" + element[header] + "</td>";
+                if (header == "url") {
+                    table += "<td><a href=" + element[header] + ">link</a></td>"
+                } else {
+                    table += "<td>" + element[header] + "</td>";
+                }
             });
             table += "</tr>";
         });
