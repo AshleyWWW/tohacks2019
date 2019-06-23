@@ -65,6 +65,12 @@ dataTable = [
     }
 ]; */
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 // what to do when the GET request comes in
 app.get('/', (req, res) => {
     // does this person's profile match this element (entry of the data table)?
