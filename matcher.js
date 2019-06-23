@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const blankMeansYes = true; 
+
 // Hard-coded values for testing
 // TODO replace with code that reads from the "database"
 dataTable = [
@@ -23,22 +25,18 @@ dataTable = [
 
 app.get('/', (req, res) => {
     function ageMatch(min, max, age) {
-        return (age >= min && age <= max);
+        return age ? (age >= min && age <= max) : blankMeansYes;
     }
     function locationMatch(places, destination) {
-        return places.includes(destination);
+        return destination ? places.includes(destination) : blankMeansYes;
     }
     function computeMatch(element, profile) {
-        if (ageMatch(element.ageMin, element.ageMax, profile.age)
-            && locationMatch(element.provinces, profile.destination)) {
-            return true;
-        }
-        return false; 
+        return (ageMatch(element.ageMin, element.ageMax, profile.age) 
+            && locationMatch(element.provinces, profile.destination));
     }
 
     results = [];
     dataTable.forEach((element) => {
-        console.log(element);
         if (computeMatch(element, req.query)) {
             results.push(element);
         }
