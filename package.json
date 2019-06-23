@@ -1,0 +1,29 @@
+{
+  "name": "tohacks2019",
+  "version": "1.0.0",
+  "description": "Project for TOHacks 2019",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "csv": "^5.1.1",
+    "csv-parser": "^2.3.0",
+    "express": "^4.17.1",
+    "bootstrap": "^4.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AshleyWWW/tohacks2019.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AshleyWWW/tohacks2019/issues"
+  },
+  "homepage": "https://github.com/AshleyWWW/tohacks2019#readme"
+}
