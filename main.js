@@ -3,14 +3,15 @@ const headerNames = ['NAME OF BURSARY', 'LINK', 'ENTRY PROVINCE', 'AGE MIN', 'AG
 
 document.getElementById("submitBtn").onclick = function () {
     function assembleQueryString() {
+        var maritalSel = document.getElementById("userProf");
         var query = "?" + 
-                    "originCountry=" + document.getElementById("originCountry").innerHTML +
-                    "&yearsInCanada=" + document.getElementById("yearsCDN").innerHTML + 
+                    // "originCountry=" + document.getElementById("originCountry").innerHTML +
+                    // "&yearsInCanada=" + document.getElementById("yearsCDN").innerHTML + 
                     "&destination=" + document.getElementById("hostProv").innerHTML + 
-                    "&age=" + document.getElementById("age").innerHTML +
-                    "&maritalStatus=" + document.getElementById("userProf").innerHTML +
-                    "&school=" + document.getElementById("school").innerHTML +
-                    "&dependants=" + document.getElementById("userDependant").innerHTML;
+                    "&age=" + document.getElementById("age").innerHTML;
+                    // "&maritalStatus=" + maritalSel.options[maritalSel.selectedIndex].text +
+                    // "&school=" + document.getElementById("school").innerHTML +
+                    // "&dependants=" + document.getElementById("userDependant").innerHTML;
     }
     
     fetch("http://localhost:3000/" + query, {
