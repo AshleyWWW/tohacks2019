@@ -22,21 +22,24 @@ dataTable = [
 ];
 
 app.get('/', (req, res) => {
-    function ageMatch(limits, age) {
-        return (age >= limits[0] && age <= limits[1]);
+    function ageMatch(min, max, age) {
+        return (age >= min && age <= max);
     }
     function locationMatch(places, destination) {
         return places.includes(destination);
     }
-    function computeMatch() {
-        return 0.0;
+    function computeMatch(element, profile) {
+        if (ageMatch(element.ageMin, element.ageMax, profile.age)
+            && locationMatch(element.provinces, profile.destination)) {
+            return true;
+        }
+        return false; 
     }
 
     results = [];
     dataTable.forEach((element) => {
         console.log(element);
-        if (ageMatch([element.ageMin, element.ageMax], req.query.age)
-            && locationMatch(element.provinces, req.query.destination)) {
+        if (computeMatch(element, req.query)) {
             results.push(element);
         }
     });
