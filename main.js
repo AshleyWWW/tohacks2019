@@ -12,7 +12,7 @@ document.getElementById("submitBtn").onclick = function (event) {
         return query;
     }
     
-    fetch("http://localhost:3000/" + assembleQueryString(), {
+    fetch("http://hackdemo0822.azurewebsites.net/" + assembleQueryString(), {
         mode: 'cors'
     }).then(function (data) {
         console.log(data);
