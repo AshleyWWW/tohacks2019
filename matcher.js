@@ -6,7 +6,28 @@ const port = 3000;
 // yes they match = true
 const blankMeansYes = true; 
 
-// Hard-coded values for testing
+//---------------------------------
+var filename = "Refugee Bursary and Grant Resource.tsv" // name of TSV
+
+const csv = require('csv-parser')
+/*var*/ const fs = require('fs')
+
+var dataTable = [] // holds all the parsed data
+
+fs.createReadStream(filename)
+    .pipe(csv(['name', 'url', 'ageMin', 'ageMax', 'provinces', 'studentStatus'], {separator: '\t'})) // be sneaky and pretend the tsv is a csv 
+    .on('data', (row) => { // for every new row, do this:
+        
+        dataTable.push(row)
+        //console.log(row) // print what you see to console?
+    })
+    .on('end', () => { // at end of file, do this
+        console.log(arr) // print every fucking thing
+        console.log('File processed. Glory to our robot overlords!')
+    })
+//-----------------------------------
+
+/* // Hard-coded values for testing
 // TODO replace with code that reads from the "database"
 dataTable = [
     {
@@ -33,7 +54,7 @@ dataTable = [
         "provinces" : ["Alberta"],
         "studentStatus": "N"
     }
-];
+]; */
 
 // what to do when the GET request comes in
 app.get('/', (req, res) => {
