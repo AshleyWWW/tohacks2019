@@ -35,7 +35,7 @@
 
 	<div class="container-contact100">
 		<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
-
+		<form action = 
 		<div class="wrap-contact100">
 			<div class="contact100-form-title" style="background-image: url(images/bg-01.jpg);">
 				<span class="contact100-form-title-1">
@@ -48,39 +48,43 @@
 				</span>
 			</div>
 
-			<form class="contact100-form validate-form">
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
+			<!--This will collect the user's name-->>
+				<div class="wrap-input100 validate-input" data-validate="Name is required", id = name >
 					<span class="label-input100">Full Name:</span>
 					<input class="input100" type="text" name="name" placeholder="Enter full name">
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Country of origin must be provided">
+				<!--This will collect the user's country of origin-->
+				<div class="wrap-input100 validate-input" data-validate = "Country of origin must be provided" id = origincountry>
 					<span class="label-input100">Home Country:</span>
 					<input class="input100" type="text" name="origin" placeholder="Enter country of origin">
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Number of years of residency is required">
+				<!--This will collect the user's number of years in Canada-->
+				<div class="wrap-input100 validate-input" data-validate="Number of years of residency is required" id = yearsCDN>
 						<span class="label-input100">Num. of years in Canada:</span>
 						<input class="input100" type="text" name="years" placeholder="Enter the number of years you've lived in Canada">
 						<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Host province is required">
+				<!--This will collect the user's resident province-->
+				<div class="wrap-input100 validate-input" data-validate="Host province is required" id = hostProv>
 					<span class="label-input100">Host Province:</span>
 					<input class="input100" type="text" name="province" placeholder="Enter host province">
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Age is required">
+				<!--This will collect the user's age-->
+				<div class="wrap-input100 validate-input" data-validate="Age is required" id = age>
 					<span class="label-input100">Age:</span>
 					<input class="input100" type="text" name="age" placeholder="Enter your age">
 					<span class="focus-input100"></span>
 				</div>
 
-
-				<div class="container">
+				<!--This will collect the user's relationship and employment profile-->
+				<div class="container" id = userProf>
 					<h4>Please select all that apply to you</h4>
 							
 					<select class="selectpicker" data-style="btn-primary" multiple data-max-options="4">
@@ -93,7 +97,9 @@
 					 
 				</div>
 
-				<div class="container">
+
+				<!--This will collect the user's English proficiency-->
+				<div class="container" id = engProficiency>
 					<h4>Can you speak and write in English?</h4>
 				
 					<select class="selectpicker" data-style="btn-primary" multiple data-max-options="1">
@@ -103,13 +109,15 @@
 						
 				</div>		
 
-				<div class="wrap-input100 validate-input" data-validate="Entry of input is required">
+				<!--This will collect the user's school in Canada-->
+				<div class="wrap-input100 validate-input" data-validate="Entry of input is required" id= school>
 						<span class="label-input100">CDN School:</span>
 						<input class="input100" type="text" name="school" placeholder="Enter your school of study, enter NONE if non-student">
 						<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Number of dependants is required">
+				<!--This will collect the number of dependants the user has-->
+				<div class="wrap-input100 validate-input" data-validate="Number of dependants is required" id = userDependants>
 						<span class="label-input100">Num. of dependants:</span>
 						<input class="input100" type="text" name="dependants" placeholder="Enter your number of dependants">
 						<span class="focus-input100"></span>
@@ -170,6 +178,8 @@
 
 	  gtag('config', 'UA-23581568-13');
 	</script>
+
+	<script type = "text/javascript" src = "FormDataConver.js">	</script>
 
 </body>
 </html>
