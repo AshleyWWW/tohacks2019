@@ -5,8 +5,9 @@ document.getElementById("submitBtn").onclick = function () {
         return data.json();
     }).then(function (body) {
         headers = ['name', 'url', 'provinces', 'ageMin', 'ageMax', 'language', 'studentStatus', 'school', 'gpa', 'maritalStat', 'dependants', 'ethnicity', 'yearsInCanada'] // renamed headers, etc
+        headerNames = ['NAME OF BURSARY', 'LINK', 'ENTRY PROVINCE', 'AGE MIN', 'AGE MAX', 'ENGLISH/FRENCH COMPETENT (oral and written)', 'STUDENT-BASED(Y/N)', 'SCHOOL OF STUDY (NONE if not student, ANY for any school)', 'GRADE AVERAGE (NONE, if none needed)', 'MARRIAGE STATUS (Married, Single, ANY)', 'NUMBER OF DEPENDANTS (ANY for acceptance regardless)', 'ETHNICITY (ANY for open acceptance)', 'Minimum Number of Years in Canada'];
         var table = "<table border='1'><tr>";
-        headers.forEach(header => {
+        headerNames.forEach(header => {
             table += "<td>" + header + "</td>";
         });
         body.forEach(element => {
